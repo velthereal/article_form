@@ -1,0 +1,16 @@
+tr td:last-of-type {
+	width: 90px;
+}
+td button {
+	width: 80px;
+	display: block;
+	height: 25px;
+	margin: 5px;
+	font-size: 15px;
+}
+td button:first-of-type {
+	background-color: #f26c69;
+}
+td button:last-of-type {
+	background-color: #8eba6b;
+}
