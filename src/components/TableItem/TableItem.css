@@ -14,3 +14,6 @@ td button:first-of-type {
 td button:last-of-type {
 	background-color: #8eba6b;
 }
+img {
+	width: 100px;
+}

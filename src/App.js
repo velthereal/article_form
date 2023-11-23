@@ -1,10 +1,10 @@
 import './app.css';
-import ArticleList from './components/ArticleList';
+import ArticleForm from './components/ArticleForm';
 
 const App = () => {
 	return (
    	<div className="app">
-			<ArticleList />
+			<ArticleForm />
 		</div>
 	);
 }

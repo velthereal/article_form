@@ -1,10 +1,10 @@
 import './TableItem.css';
 
 const TableItem = (props) => {
-	const { img, name, model, price, category, amount, } = props;
+	const { img, name, model, price, category, amount, id } = props;
 	return (
 		<tr>
-			<td>{ img }</td>
+			<td><img src={ img } alt="img" /></td>
 			<td>{ name }</td>
 			<td>{ model }</td>
 			<td>{ price }</td>
