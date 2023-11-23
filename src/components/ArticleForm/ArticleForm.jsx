@@ -28,6 +28,9 @@ const DEFAULT_ARTICLES = [
 
 const ArticleForm = () => {
 	const [articles, setArticles] = useState(DEFAULT_ARTICLES);
+	const [currentArticleId, setCurrentArticleId] = useState(null);
+
+	const [isEditMode, setIsEditMode] = useState(false);
 
 	const [name, setName] = useState();
 	const [price, setPrice] = useState();
@@ -75,6 +78,47 @@ const ArticleForm = () => {
 		onGetAmount('');
 		onGetModel('');
 	}
+	const onSaveArticle = () => {
+		const updatedArticles = articles.map((article) => 
+			article.id === currentArticleId
+			? {
+					...article,
+					name,
+					price,
+					img,
+					category,
+					amount,
+					model,
+				}
+				: article);
+				
+		setArticles(updatedArticles);
+		setIsEditMode(false);
+
+		setCurrentArticleId(null);
+
+		onGetName('');
+		onGetPrice('');
+		onGetImg('');
+		onGetCategory('');
+		onGetAmount('');
+		onGetModel('');
+	}
+
+	const onDeleteArticleHandler = (id) => {
+		setArticles(articles.filter((article) => article.id !== id));
+	}
+	const onUpdateArticleHandler = (id) => {
+		const currentArticle = articles.find((article) => article.id === id);
+		setCurrentArticleId(id);
+		setName(currentArticle.name);
+		setPrice(currentArticle.price);
+		setImg(currentArticle.img);
+		setCategory(currentArticle.category);
+		setAmount(currentArticle.amount);
+		setModel(currentArticle.model);
+		setIsEditMode(true);
+	}
 
 	return (
 		<div className="articles">
@@ -111,7 +155,11 @@ const ArticleForm = () => {
 					placeholder='Напишіть модель товару'
 					onChangeFunction={onGetModel}
 					value={model} />
-				<button type="button" onClick={onAddArticle}>Add</button>
+				{ isEditMode ? 
+					<button type="button" onClick={onSaveArticle}>Save</button> :
+					<button type="button" onClick={onAddArticle}>Add</button>
+				}
+				
 			</form>
 			<table>
 				<tr>
@@ -134,7 +182,9 @@ const ArticleForm = () => {
 							category={category}
 							amount={amount}
 							model={model}
-							id={id} />
+							id={id}
+							onClickDeleteBtn={onDeleteArticleHandler}
+							onClickUpdateBtn={onUpdateArticleHandler} />
 					)
 				})}
 		</table>
